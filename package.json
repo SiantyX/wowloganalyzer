@@ -16,7 +16,5 @@
     "url": "https://github.com/SiantyX/wowloganalyzer/issues"
   },
   "homepage": "https://github.com/SiantyX/wowloganalyzer#readme",
-  "dependencies": {
-    "node-fetch": "^3.2.4"
-  }
+  "type": "module"
 }

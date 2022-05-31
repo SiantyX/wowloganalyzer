@@ -1,5 +1,5 @@
 let currentToken = "";
-let expiresIn = new Date();
+let expiresIn = 0;
 
 async function getWLToken() {
   // curl -u x:y -d grant_type=client_credentials https://www.warcraftlogs.com/oauth/token
@@ -25,7 +25,7 @@ async function getWLToken() {
 }
 
 // {"query":"{\n\treportData {\n\t\treport(code: \"pmxJZcQ1f37w94jd\") {\n\t\t\tevents(dataType: Casts, abilityID: 28499, useActorIDs: false) {\n\t\t\t\tdata\n\t\t\t\tnextPageTimestamp\n\t\t\t}\n\t\t}\n\t}\n}"}
-async function callWLAPI(graphql) {
+export async function callWLAPI(graphql) {
   if ((new Date()) > expiresIn) {
     await getWLToken();
   }
@@ -39,6 +39,4 @@ async function callWLAPI(graphql) {
     method: "POST"
   });
 }
-
-module.exports = { callWLAPI };
 

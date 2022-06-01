@@ -2,6 +2,10 @@ let currentToken = "";
 let expiresIn = 0;
 
 async function getWLToken() {
+  if (process.env.WL_ID === undefined || process.env.WL_SECRET === undefined) {
+    throw new Error("Missing env WL_ID and/or WL_SECRET");
+  }
+
   // curl -u x:y -d grant_type=client_credentials https://www.warcraftlogs.com/oauth/token
   const basic = Buffer.from(`${process.env.WL_ID}:${process.env.WL_SECRET}`).toString("base64");
   const res = await fetch("https://www.warcraftlogs.com/oauth/token", {

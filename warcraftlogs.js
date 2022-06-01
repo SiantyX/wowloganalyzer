@@ -29,7 +29,6 @@ export async function callWLAPI(graphql) {
   if ((new Date()) > expiresIn) {
     await getWLToken();
   }
-  console.log(expiresIn);
   return await fetch("https://classic.warcraftlogs.com/api/v2/client", {
     body: JSON.stringify(graphql),
     headers: {

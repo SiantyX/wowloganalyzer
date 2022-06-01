@@ -85,6 +85,8 @@ typings/
 # Next.js build output
 .next
 
+launch.json
+
 # Nuxt.js build / generate output
 .nuxt
 dist

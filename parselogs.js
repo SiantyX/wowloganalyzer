@@ -63,6 +63,7 @@ let a = {
 }
 */
 
+// TODO a bug somewhere makes it accumulate
 async function getConsumes(fullQueryList, logId) {
   const consumes = {};
 

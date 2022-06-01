@@ -24,7 +24,7 @@ const ql = [
   { alias: "manapots", dataType: "cast", abilityID: 28499, startTime: 0 },
   { alias: "darkrunes", dataType: "cast", abilityID: 27869, startTime: 0 }
 ];
-const logId = "pmxJZcQ1f37w94jd";
+const logId = "gWkrGhyX7FJmvnVC";
 //getConsumes(ql, logId).then(r => console.log(r));
 
 getConsumes(ql, logId).then(r => {

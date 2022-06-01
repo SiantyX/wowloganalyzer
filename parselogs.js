@@ -1,6 +1,6 @@
 import { callWLAPI } from "./warcraftlogs.js";
 
-const MAX_CALLS = 1; //20;
+const MAX_CALLS = 20; //20;
 
 /*
   const query = {
@@ -63,7 +63,6 @@ let a = {
 }
 */
 
-// TODO a bug somewhere makes it accumulate
 export async function getConsumes(fullQueryList, logId) {
   const consumes = {};
 
@@ -82,8 +81,8 @@ export async function getConsumes(fullQueryList, logId) {
     const data = await res.json();
     const events = data.data.reportData.report
     Object.keys(events).map(key => {
-      if (events[key]["nextPageTimestamp"] == null) {
-        queryList.push({ dataType: events[key]["data"][0]["type"], startTime: events[key]["nextPageTimestamp"], abilityID: events[key]["data"][0]["abilityGameID"] });
+      if (events[key]["nextPageTimestamp"] != null) {
+        queryList.push({ alias: key, dataType: events[key]["data"][0]["type"], startTime: events[key]["nextPageTimestamp"], abilityID: events[key]["data"][0]["abilityGameID"] });
       }
 
       events[key]["data"].map(ev => {

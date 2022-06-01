@@ -64,7 +64,7 @@ let a = {
 */
 
 // TODO a bug somewhere makes it accumulate
-async function getConsumes(fullQueryList, logId) {
+export async function getConsumes(fullQueryList, logId) {
   const consumes = {};
 
   let queryList = fullQueryList;
@@ -91,12 +91,12 @@ async function getConsumes(fullQueryList, logId) {
           consumes[ev.source.name] = {consumes: {}}
         }
 
-        if (!Object.keys(consumes[ev.source.name].consumes).includes(ev.abilityGameID)) {
+        if (!Object.keys(consumes[ev.source.name].consumes).includes(ev.abilityGameID.toString())) {
           consumes[ev.source.name].consumes[ev.abilityGameID] = {fights: {}, total: 0};
         }
 
         consumes[ev.source.name].consumes[ev.abilityGameID].total++;
-        if (!Object.keys(consumes[ev.source.name].consumes[ev.abilityGameID].fights).includes(ev.fight)) {
+        if (!Object.keys(consumes[ev.source.name].consumes[ev.abilityGameID].fights).includes(ev.fight.toString())) {
           consumes[ev.source.name].consumes[ev.abilityGameID].fights[ev.fight] = 1;
         } else {
           consumes[ev.source.name].consumes[ev.abilityGameID].fights[ev.fight]++;
@@ -107,40 +107,5 @@ async function getConsumes(fullQueryList, logId) {
 
   return consumes;
 }
-
-
-
-
-/*
-  const query = {
-    query: `{
-      reportData {
-        report(code: "${logId}") {
-          manapots: events(dataType: Casts, abilityID: 28499, startTime: 0, endTime: 99999999, useActorIDs: false) {
-            data
-            nextPageTimestamp
-          }
-          darkrunes: events(dataType: Casts, abilityID: 27869, startTime: 0, endTime: 99999999, useActorIDs: false) {
-            data
-            nextPageTimestamp
-          }
-        }
-      }
-    }`
-  }
-*/
-
-
-import fs from "fs"
-const ql = [
-  { alias: "manapots", dataType: "cast", abilityID: 28499, startTime: 0 },
-  { alias: "darkrunes", dataType: "cast", abilityID: 27869, startTime: 0 }
-];
-const logId = "pmxJZcQ1f37w94jd";
-//getConsumes(ql, logId).then(r => console.log(r));
-
-getConsumes(ql, logId).then(r => {
-  fs.writeFileSync("./test.json", JSON.stringify(r, null, 2) , "utf-8");
-});
 
 

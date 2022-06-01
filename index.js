@@ -25,15 +25,7 @@ const logId = "gWkrGhyX7FJmvnVC";
 const dataType = "cast"
 Object.keys(consumeList[dataType]).map(category => {
   const ql = [];
-  /*
-  const ql = [
-    { alias: "manapots", dataType: "cast", abilityID: 28499, startTime: 0 },
-    { alias: "darkrunes", dataType: "cast", abilityID: 27869, startTime: 0 }
-  ];
-  */
   
-  //getConsumes(ql, logId).then(r => console.log(r));
-
   consumeList[dataType][category].map(id => {
     ql.push({ alias: `id${id.toString()}`, dataType: dataType, abilityID: id, startTime: 0 });
   });
